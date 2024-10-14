@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebRTC Media Stream Recorder</title>
+  <link rel="stylesheet" href="recorder.css">
+  <script defer src="recorder.js"></script>
+</head>
+<body>
+  <h1>WebRTC Screen Recording</h1>
+  <div id="recordStatus"></div>
+  <div id="recordControls">
+    <button class="record-btn" id="startRecording">Record</button>
+    <button class="record-btn" id="pauseRecording" disabled>Pause</button>
+    <button class="record-btn" id="stopRecording" disabled>Stop</button>
+    <button class="record-btn" id="playRecording" disabled>Play</button>
+    <button class="record-btn" id="saveRecording" disabled>Save</button>
+</div>
+  <video controls playsinline autoplay hidden id="recordingVideo"></video>
+</body>
+</html>

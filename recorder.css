@@ -1,0 +1,27 @@
+:root {
+  --size: 600px;
+}
+
+h1,
+#recordStatus {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.record-btn {
+  background-color: #333;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: #ddd;
+  padding: 4px 8px;
+  margin: 2px;
+  font-weight: bold;
+  letter-spacing: .05rem;
+  font-family: sans-serif;
+}
+
+video {
+  width: var(--size);
+  height: var(--size);
+}
