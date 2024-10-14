@@ -31,6 +31,8 @@ For example running in dev mode, use extension for VS Code `Live Server`.
 - Does not support recording of protected content (e.g. Netflix, Hulu).
 - Does not support recording of multiple screens or audio sources.
 
+[displaySurface](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackSettings/displaySurface) option is not supported in Firefox.
+
 ## License
 
 This application is licensed under the MIT License. See the LICENSE file for details.
