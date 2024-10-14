@@ -31,11 +31,11 @@ const getFileName = () => {
 }
 
 const setStatus = (status) => {
-  nodes.statusElement.innerText = statuses[status]
+  nodes.statusElement.innerText = status
 }
 
 const startRecording = async () => {
-  setStatus('starting')
+  setStatus(statuses.starting)
   try {
     const audioStream = await navigator.mediaDevices.getUserMedia({
       video: false,
@@ -71,7 +71,7 @@ const startRecording = async () => {
 
     mediaRecorder.start()
 
-    setStatus('started')
+    setStatus(statuses.started)
     nodes.startButton.disabled = true
     nodes.pauseButton.disabled = false
     nodes.stopButton.disabled = false
@@ -84,10 +84,10 @@ const startRecording = async () => {
 }
 
 const stopRecording = () => {
-  setStatus('stopping')
+  setStatus(statuses.stopping)
   mediaRecorder.stop()
 
-  setStatus('stopped')
+  setStatus(statuses.stopped)
   nodes.startButton.disabled = false
   nodes.pauseButton.disabled = true
   nodes.stopButton.disabled = true
@@ -97,11 +97,11 @@ const stopRecording = () => {
 
 const pauseRecording = () => {
   if (mediaRecorder.state === 'paused') {
-    setStatus('starting')
+    setStatus(statuses.starting)
     mediaRecorder.resume()
     nodes.pauseButton.innerText = 'Pause'
   } else if (mediaRecorder.state === 'recording') {
-    setStatus('stopping')
+    setStatus(statuses.stopping)
     mediaRecorder.pause()
     nodes.pauseButton.innerText = 'Resume'
   }
@@ -110,14 +110,14 @@ const pauseRecording = () => {
 const playRecording = () => {
   nodes.videoElement.hidden = !nodes.videoElement.hidden
   if (!nodes.videoElement.hidden) {
-    setStatus('started')
+    setStatus(statuses.started)
     nodes.videoElement.src = window.URL.createObjectURL(
       new Blob(recordingData, { type: 'video/webm' }),
     )
     nodes.videoElement.play()
     nodes.playButton.innerText = 'Hide'
   } else {
-    setStatus('stopped')
+    setStatus(statuses.stopped)
     nodes.playButton.innerText = 'Play'
   }
 }
