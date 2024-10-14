@@ -20,6 +20,10 @@ const statuses = {
   error: 'Error: ',
 }
 
+const options = {
+  type: 'video/webm; codecs="vp8,opus"'
+}
+
 let mediaRecorder
 let recordingData = []
 
@@ -55,7 +59,8 @@ const startRecording = async () => {
       .forEach((track) => mixedStream.addTrack(track))
     audioStream.getAudioTracks().forEach((track) => mixedStream.addTrack(track))
 
-    mediaRecorder = new MediaRecorder(mixedStream, { mimeType: 'video/webm' })
+
+    mediaRecorder = new MediaRecorder(mixedStream, options)
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data && event.data.size > 0) {
@@ -112,7 +117,7 @@ const playRecording = () => {
   if (!nodes.videoElement.hidden) {
     setStatus(statuses.started)
     nodes.videoElement.src = window.URL.createObjectURL(
-      new Blob(recordingData, { type: 'video/webm' }),
+      new Blob(recordingData, options),
     )
     nodes.videoElement.play()
     nodes.playButton.innerText = 'Hide'
@@ -124,7 +129,7 @@ const playRecording = () => {
 
 const saveRecording = () => {
   setStatus('saving')
-  const blob = new Blob(recordingData, { type: 'video/webm' })
+  const blob = new Blob(recordingData, options)
   const url = window.URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.style.display = 'none'
