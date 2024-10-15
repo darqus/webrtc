@@ -70,7 +70,7 @@ h1 {
 
 .hamburger-menu {
   position: fixed;
-  top: 4rem;
+  top: 3.6rem;
   right: -250px;
   width: 250px;
   transition: right 0.3s ease;
