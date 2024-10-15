@@ -34,9 +34,6 @@ h1,
 }
 
 .screen-recorder {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
@@ -71,4 +68,26 @@ h1,
 #recordButton:hover,
 #setCustomFrame:hover {
   opacity: 0.8;
+}
+
+.hamburger-menu {
+  position: fixed;
+  top: 4rem;
+  right: -250px;
+  width: 250px;
+  transition: right 0.3s ease;
+}
+
+.hamburger-menu.open {
+  right: 0;
+}
+
+.hamburger-button {
+  position: fixed;
+  top: .7rem;
+  right: .7rem;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
 }
