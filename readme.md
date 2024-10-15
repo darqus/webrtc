@@ -15,9 +15,9 @@ A simple WebRTC screen recording application.
 
 To run in development mode, use the `Live Server` extension for VS Code.
 
-Click the hamburger menu button to toggle the menu and set the source frame for the screen recorder.
+Click the hamburger menu button to toggle the menu and set the source for iframe for the screen recorder.
 
-Click the Record button to start recording from the next tab.
+Click the Record button to start recording from a neighboring tab.
 
 ## Limitations
 
