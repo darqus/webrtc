@@ -23,7 +23,7 @@ h2,
   margin: 0;
 }
 
-#recordControls>div {
+#recordControlsWrapper>div {
   display: grid;
   grid-auto-flow: column;
   grid-gap: .5rem;
@@ -62,4 +62,5 @@ video {
   display: grid;
   width: 80vw;
   height: 100%;
+  visibility: hidden;
 }

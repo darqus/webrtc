@@ -11,6 +11,7 @@ const nodeIds = {
   saveButton: 'saveRecording',
   statusElement: 'recordStatus',
   recordControls: 'recordControls',
+  recordControlsWrapper: 'recordControlsWrapper',
   videoElement: 'recordingVideo',
 }
 
@@ -37,6 +38,7 @@ const nodes = Object.fromEntries(
 )
 
 const statuses = {
+  initial: 'Getting ready',
   starting: 'Starting recording...',
   started: 'Recording...',
   stopping: 'Stopping recording...',
@@ -136,8 +138,8 @@ const pauseRecording = () => {
 }
 
 const playRecording = () => {
-  nodes.videoElement.hidden = !nodes.videoElement.hidden
-  if (!nodes.videoElement.hidden) {
+  nodes.videoElement.style.visibility = 'visible'
+  if (nodes.videoElement.style.visibility === 'visible') {
     setStatus(statuses.started)
     nodes.videoElement.src = window.URL.createObjectURL(
       new Blob(recordingData, options),
@@ -178,7 +180,7 @@ const getButtons = () => buttons.map(({ id, label, disabled }) => {
 
 const createControls = () => {
   const controls = document.createElement('div')
-  // controls.id = nodeIds.recordControls
+  controls.id = nodeIds.recordControls
 
   const buttons = getButtons()
 
@@ -195,6 +197,8 @@ const addEventListeners = () => {
   getEl(nodeIds.saveButton).addEventListener('click', saveRecording)
 }
 
-getEl(nodeIds.recordControls).appendChild(createControls())
+getEl(nodeIds.recordControlsWrapper).appendChild(createControls())
 
 addEventListeners()
+
+setStatus(statuses.initial)
