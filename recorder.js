@@ -10,8 +10,8 @@ const nodeIds = {
   playButton: 'playRecording',
   saveButton: 'saveRecording',
   statusElement: 'recordStatus',
-  videoElement: 'recordingVideo',
   recordControls: 'recordControls',
+  videoElement: 'recordingVideo',
 }
 
 const buttonLabels = {
@@ -167,19 +167,7 @@ const saveRecording = () => {
   setStatus('saved')
 }
 
-const createControls = () => {
-  const controls = document.createElement('div')
-  controls.id = nodeIds.recordControls
-
-  const buttons = getButtons()
-
-  buttons.forEach((button) => controls.appendChild(button))
-
-  return controls
-}
-
-const getButtons = () => {
-  return buttons.map(({ id, label, disabled }) => {
+const getButtons = () => buttons.map(({ id, label, disabled }) => {
     const button = document.createElement('button')
     button.id = id
     button.innerHTML = label
@@ -187,6 +175,16 @@ const getButtons = () => {
     button.classList.add('record-btn')
     return button
   })
+
+const createControls = () => {
+  const controls = document.createElement('div')
+  // controls.id = nodeIds.recordControls
+
+  const buttons = getButtons()
+
+  buttons.forEach((button) => controls.appendChild(button))
+
+  return controls
 }
 
 const addEventListeners = () => {

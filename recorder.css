@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  display: grid;
 }
 
 body {
@@ -7,17 +8,22 @@ body {
   margin: 0;
   display: grid;
   place-items: center;
-  grid-template-rows: repeat(2, auto);
   grid-gap: 1rem;
 }
 
-h5,
+section {
+  display: grid;
+  grid-gap: .7rem;
+  place-items: center;
+}
+
+h2,
 #recordStatus {
   font-family: sans-serif;
   margin: 0;
 }
 
-#recordControls {
+#recordControls>div {
   display: grid;
   grid-auto-flow: column;
   grid-gap: .5rem;
@@ -53,6 +59,7 @@ h5,
 }
 
 video {
-  width: auto;
+  display: grid;
+  width: 80vw;
   height: 100%;
 }
