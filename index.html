@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Content</title>
+  <title>Screencast Content</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="index.js"></script>
 </head>
 <body>
-  <h1>Content</h1>
-  <iframe class="jitsi" allow="camera; microphone; fullscreen; display-capture; autoplay" src="https://meet.jit.si/AccountablePatrolsDeployEmotionally"></iframe>
+  <section>
+  <h1>Screencast Content</h1>
+  <iframe class="screen-recorder-iframe" allow="camera; microphone; fullscreen; display-capture; autoplay" src="https://meet.jit.si/AccountablePatrolsDeployEmotionally"></iframe>
+  </section>
+
   <div class="screen-recorder">
+    <input id="customFrame" placeholder="Enter custom frame src">
+    <button id="setCustomFrame">📼 Set custom frame</button>
+
     <a href="recorder.html" target="_blank">
-      <button id="recordButton">Record</button>
+      <button id="recordButton">📹 Record</button>
     </a>
   </div>
 </body>

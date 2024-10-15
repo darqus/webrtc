@@ -4,11 +4,21 @@ html {
 
 body {
   height: 100%;
+  width: 100%;
   margin: 0;
   display: grid;
   place-items: center;
-  grid-template-rows: repeat(1, auto) 1fr;
+  grid-template-rows: 1fr;
   grid-gap: 1rem;
+}
+
+section {
+  display: grid;
+  grid-gap: 1rem;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  grid-template-rows: auto 1fr;
 }
 
 h1,
@@ -17,7 +27,7 @@ h1,
   margin: 0;
 }
 
-.jitsi {
+.screen-recorder-iframe {
   width: 100%;
   height: 100%;
   border: none;
@@ -32,10 +42,17 @@ h1,
   border-radius: 0.5rem;
   padding: 1rem;
   z-index: 10;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: grid;
+  grid-gap: 1rem;
 }
 
-#recordButton {
+#recordButton,
+#setCustomFrame {
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -43,4 +60,15 @@ h1,
   font-size: 1rem;
   background-color: #ee0000;
   color: #fff;
+  width: 100%;
+  transition: opacity 0.3s;
+}
+
+#setCustomFrame {
+  background-color: #33cc33;
+}
+
+#recordButton:hover,
+#setCustomFrame:hover {
+  opacity: 0.8;
 }
