@@ -13,16 +13,10 @@ A simple WebRTC screen recording application.
 
 `index.html` is a simple WebRTC screen recording application.
 
-1. Click the "Record" button to start recording.
-2. Click the "Pause" button to pause recording.
-3. Click the "Resume" button to resume recording.
-4. Click the "Stop" button to stop recording.
-5. Click the "Play" button to play back the recorded video.
-6. Click the "Save" button to save the recorded video to a file.
-
-`frames.html` is a simple WebRTC screen recording application that uses frames to record browser screen and audio.
-
 For example running in dev mode, use extension for VS Code `Live Server`.
+
+Click on Hamburger menu button to toggle hamburger menu for set src frame of screen recorder
+Click Record button for start recording from the next tab.
 
 ## Limitations
 
