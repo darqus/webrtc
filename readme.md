@@ -4,10 +4,10 @@ A simple WebRTC screen recording application.
 
 ## Features
 
-- Record browser screen and audio
+- Record browser screen and audio from a neighboring tab
 - Pause and resume recording
-- Play back recorded video
-- Save recorded video to file
+- Play back the recorded video
+- Save the recorded video to a file
 
 ## Usage
 
