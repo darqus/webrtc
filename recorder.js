@@ -16,13 +16,13 @@ const elementIds = {
 }
 
 const buttonIcons = {
-  start: '📹',
+  start: '🎦',
   pause: '⏸️',
-  stop: '⏹',
+  stop: '⏹️',
   play: '▶️',
-  resume: '▶️',
-  hide: '✕',
-  save: '📼',
+  resume: '⏯️',
+  hide: '⏏️',
+  save: '🔽',
 }
 
 const buttonConfigs = [
