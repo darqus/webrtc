@@ -68,9 +68,14 @@ const startRecording = async () => {
       video: false,
       audio: true,
     })
+
     const displayStream = await navigator.mediaDevices.getDisplayMedia({
       video: { displaySurface: 'browser' },
-      audio: { channelCount: 2 },
+      audio: {
+        restrictOwnAudio: false,
+        channelCount: 2,
+        autoGainControl: true,
+      },
     })
 
     const mixedStream = new MediaStream()
