@@ -133,19 +133,19 @@ const pauseRecording = () => {
 }
 
 const playRecording = () => {
-  const videoElement = getElementById(elementIds.videoElement)
-  if (videoElement.style.visibility === 'visible') {
-    updateStatus(statusMessages.recording)
-    videoElement.src = window.URL.createObjectURL(
-      new Blob(recordedChunks, mediaOptions),
-    )
-    videoElement.play()
-    getElementById(elementIds.playButton).innerText = buttonIcons.hide
-    videoElement.style.visibility = 'hidden'
-  } else {
-    videoElement.style.visibility = 'visible'
+  const video = getElementById(elementIds.videoElement)
+  if (video.style.visibility === 'visible') {
+    video.style.visibility = 'hidden'
     updateStatus(statusMessages.stopped)
     getElementById(elementIds.playButton).innerText = buttonIcons.play
+  } else {
+    video.style.visibility = 'visible'
+    video.src = window.URL.createObjectURL(
+      new Blob(recordedChunks, mediaOptions),
+    )
+    video.play()
+    updateStatus(statusMessages.recording)
+    getElementById(elementIds.playButton).innerText = buttonIcons.hide
   }
 }
 
