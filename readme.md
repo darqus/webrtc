@@ -13,10 +13,11 @@ A simple WebRTC screen recording application.
 
 `index.html` is a simple WebRTC screen recording application.
 
-For example running in dev mode, use extension for VS Code `Live Server`.
+To run in development mode, use the `Live Server` extension for VS Code.
 
-Click on Hamburger menu button to toggle hamburger menu for set src frame of screen recorder
-Click Record button for start recording from the next tab.
+Click the hamburger menu button to toggle the menu and set the source frame for the screen recorder.
+
+Click the Record button to start recording from the next tab.
 
 ## Limitations
 
