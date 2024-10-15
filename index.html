@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebRTC Media Stream Recorder</title>
-  <link rel="stylesheet" href="recorder.css">
-  <script defer src="recorder.js"></script>
+  <title>Content</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>WebRTC Screen Recording</h1>
-  <div id="recordStatus"></div>
-  <div id="recordControls">
-    <button class="record-btn" id="startRecording">Record</button>
-    <button class="record-btn" id="pauseRecording" disabled>Pause</button>
-    <button class="record-btn" id="stopRecording" disabled>Stop</button>
-    <button class="record-btn" id="playRecording" disabled>Play</button>
-    <button class="record-btn" id="saveRecording" disabled>Save</button>
+  <h1>Content</h1>
+  <iframe class="jitsi" allow="camera; microphone; fullscreen; display-capture; autoplay" src="https://meet.jit.si/AccountablePatrolsDeployEmotionally"></iframe>
+  <div class="screen-recorder">
+    <a href="recorder.html" target="_blank">
+      <button id="recordButton">Record</button>
+    </a>
   </div>
-  <video controls playsinline autoplay hidden id="recordingVideo"></video>
 </body>
 </html>

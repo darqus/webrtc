@@ -1,14 +1,40 @@
+let mediaRecorder
+let recordingData = []
+
 const getEl = (id) => document.getElementById(id)
 
-const nodes = {
-  startButton: getEl('startRecording'),
-  pauseButton: getEl('pauseRecording'),
-  stopButton: getEl('stopRecording'),
-  playButton: getEl('playRecording'),
-  saveButton: getEl('saveRecording'),
-  statusElement: getEl('recordStatus'),
-  videoElement: getEl('recordingVideo'),
+const nodeIds = {
+  startButton: 'startRecording',
+  pauseButton: 'pauseRecording',
+  stopButton: 'stopRecording',
+  playButton: 'playRecording',
+  saveButton: 'saveRecording',
+  statusElement: 'recordStatus',
+  videoElement: 'recordingVideo',
+  recordControls: 'recordControls',
 }
+
+const buttonLabels = {
+  startButton: '📹', // start recording
+  pauseButton: '⏸️', // pause recording
+  stopButton: '⏹', // stop recording
+  playButton: '▶️', // play recording
+  resumeButton: '▶️', // resume recording
+  hideButton: '✕', // hide recording
+  saveButton: '📼', // save recording
+}
+
+const buttons = [
+  { id: nodeIds.startButton, label: buttonLabels.startButton, disabled: false },
+  { id: nodeIds.pauseButton, label: buttonLabels.pauseButton, disabled: true },
+  { id: nodeIds.stopButton, label: buttonLabels.stopButton, disabled: true },
+  { id: nodeIds.playButton, label: buttonLabels.playButton, disabled: true },
+  { id: nodeIds.saveButton, label: buttonLabels.saveButton, disabled: true },
+]
+
+const nodes = Object.fromEntries(
+  Object.entries(nodeIds).map(([key, id]) => [key, getEl(id)]),
+)
 
 const statuses = {
   starting: 'Starting recording...',
@@ -23,9 +49,6 @@ const statuses = {
 const options = {
   type: 'video/webm; codecs="vp8,opus"'
 }
-
-let mediaRecorder
-let recordingData = []
 
 const getFileName = () => {
   const now = new Date()
@@ -104,11 +127,11 @@ const pauseRecording = () => {
   if (mediaRecorder.state === 'paused') {
     setStatus(statuses.starting)
     mediaRecorder.resume()
-    nodes.pauseButton.innerText = 'Pause'
-  } else if (mediaRecorder.state === 'recording') {
+    nodes.pauseButton.innerText = buttonLabels.pauseButton
+  } else if (mediaRecorder.state === statuses.recording) {
     setStatus(statuses.stopping)
     mediaRecorder.pause()
-    nodes.pauseButton.innerText = 'Resume'
+    nodes.pauseButton.innerText = buttonLabels.resumeButton
   }
 }
 
@@ -120,10 +143,10 @@ const playRecording = () => {
       new Blob(recordingData, options),
     )
     nodes.videoElement.play()
-    nodes.playButton.innerText = 'Hide'
+    nodes.playButton.innerText = buttonLabels.hideButton
   } else {
     setStatus(statuses.stopped)
-    nodes.playButton.innerText = 'Play'
+    nodes.playButton.innerText = buttonLabels.playButton
   }
 }
 
@@ -144,8 +167,36 @@ const saveRecording = () => {
   setStatus('saved')
 }
 
-nodes.startButton.addEventListener('click', startRecording)
-nodes.stopButton.addEventListener('click', stopRecording)
-nodes.pauseButton.addEventListener('click', pauseRecording)
-nodes.playButton.addEventListener('click', playRecording)
-nodes.saveButton.addEventListener('click', saveRecording)
+const createControls = () => {
+  const controls = document.createElement('div')
+  controls.id = nodeIds.recordControls
+
+  const buttons = getButtons()
+
+  buttons.forEach((button) => controls.appendChild(button))
+
+  return controls
+}
+
+const getButtons = () => {
+  return buttons.map(({ id, label, disabled }) => {
+    const button = document.createElement('button')
+    button.id = id
+    button.innerHTML = label
+    button.disabled = disabled
+    button.classList.add('record-btn')
+    return button
+  })
+}
+
+const addEventListeners = () => {
+  getEl(nodeIds.startButton).addEventListener('click', startRecording)
+  getEl(nodeIds.stopButton).addEventListener('click', stopRecording)
+  getEl(nodeIds.pauseButton).addEventListener('click', pauseRecording)
+  getEl(nodeIds.playButton).addEventListener('click', playRecording)
+  getEl(nodeIds.saveButton).addEventListener('click', saveRecording)
+}
+
+getEl(nodeIds.recordControls).appendChild(createControls())
+
+addEventListeners()
