@@ -37,7 +37,7 @@ const statusMessages = {
   initial: 'Getting ready',
   starting: 'Starting recording...',
   recording: 'Recording...',
-  stopping: 'Stopping recording...',
+  paused: 'Paused recording...',
   stopped: 'Recording stopped',
   saving: 'Saving recording...',
   saved: 'Recording saved',
@@ -114,7 +114,7 @@ const startRecording = async () => {
 }
 
 const stopRecording = () => {
-  updateStatus(statusMessages.stopping)
+  updateStatus(statusMessages.paused)
   mediaRecorder.stop()
 
   updateStatus(statusMessages.stopped)
@@ -131,7 +131,7 @@ const pauseRecording = () => {
     mediaRecorder.resume()
     getElementById(elementIds.pauseButton).innerText = buttonIcons.pause
   } else if (mediaRecorder.state === 'recording') {
-    updateStatus(statusMessages.stopping)
+    updateStatus(statusMessages.paused)
     mediaRecorder.pause()
     getElementById(elementIds.pauseButton).innerText = buttonIcons.resume
   }
