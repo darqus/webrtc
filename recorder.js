@@ -100,11 +100,11 @@ const startRecording = async () => {
     mediaRecorder.start()
 
     setStatus(statuses.started)
-    nodes.startButton.disabled = true
-    nodes.pauseButton.disabled = false
-    nodes.stopButton.disabled = false
-    nodes.playButton.disabled = true
-    nodes.saveButton.disabled = true
+    getEl(nodeIds.startButton).disabled = true
+    getEl(nodeIds.pauseButton).disabled = false
+    getEl(nodeIds.stopButton).disabled = false
+    getEl(nodeIds.playButton).disabled = true
+    getEl(nodeIds.saveButton).disabled = true
   } catch (error) {
     console.error('capture failure', error)
     setStatus('error', error)
@@ -116,11 +116,11 @@ const stopRecording = () => {
   mediaRecorder.stop()
 
   setStatus(statuses.stopped)
-  nodes.startButton.disabled = false
-  nodes.pauseButton.disabled = true
-  nodes.stopButton.disabled = true
-  nodes.playButton.disabled = false
-  nodes.saveButton.disabled = false
+  getEl(nodeIds.startButton).disabled = false
+  getEl(nodeIds.pauseButton).disabled = true
+  getEl(nodeIds.stopButton).disabled = true
+  getEl(nodeIds.playButton).disabled = false
+  getEl(nodeIds.saveButton).disabled = false
 }
 
 const pauseRecording = () => {
