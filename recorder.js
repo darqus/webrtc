@@ -49,7 +49,7 @@ const statuses = {
 }
 
 const options = {
-  type: 'video/webm; codecs="vp8,opus"'
+  type: 'video/webm; codecs="vp8,opus"',
 }
 
 const getFileName = () => {
@@ -83,7 +83,6 @@ const startRecording = async () => {
       .getVideoTracks()
       .forEach((track) => mixedStream.addTrack(track))
     audioStream.getAudioTracks().forEach((track) => mixedStream.addTrack(track))
-
 
     mediaRecorder = new MediaRecorder(mixedStream, options)
 
@@ -129,26 +128,28 @@ const pauseRecording = () => {
   if (mediaRecorder.state === 'paused') {
     setStatus(statuses.starting)
     mediaRecorder.resume()
-    nodes.pauseButton.innerText = buttonLabels.pauseButton
+    getEl(nodeIds.pauseButton).innerText = buttonLabels.pauseButton
   } else if (mediaRecorder.state === statuses.recording) {
     setStatus(statuses.stopping)
     mediaRecorder.pause()
-    nodes.pauseButton.innerText = buttonLabels.resumeButton
+    getEl(nodeIds.pauseButton).innerText = buttonLabels.resumeButton
   }
 }
 
 const playRecording = () => {
-  nodes.videoElement.style.visibility = 'visible'
-  if (nodes.videoElement.style.visibility === 'visible') {
+  const videoElement = nodes.videoElement
+  if (videoElement.style.visibility === 'visible') {
     setStatus(statuses.started)
-    nodes.videoElement.src = window.URL.createObjectURL(
+    videoElement.src = window.URL.createObjectURL(
       new Blob(recordingData, options),
     )
-    nodes.videoElement.play()
-    nodes.playButton.innerText = buttonLabels.hideButton
+    videoElement.play()
+    getEl(nodeIds.playButton).innerText = buttonLabels.hideButton
+    videoElement.style.visibility = 'hidden'
   } else {
+    videoElement.style.visibility = 'visible'
     setStatus(statuses.stopped)
-    nodes.playButton.innerText = buttonLabels.playButton
+    getEl(nodeIds.playButton).innerText = buttonLabels.playButton
   }
 }
 
@@ -169,7 +170,8 @@ const saveRecording = () => {
   setStatus('saved')
 }
 
-const getButtons = () => buttons.map(({ id, label, disabled }) => {
+const getButtons = () =>
+  buttons.map(({ id, label, disabled }) => {
     const button = document.createElement('button')
     button.id = id
     button.innerHTML = label
