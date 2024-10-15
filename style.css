@@ -53,14 +53,14 @@ h1 {
   cursor: pointer;
   padding: 4px 8px;
   font-size: 1rem;
-  background-color: #ee0000;
+  background-color: #e00;
   color: #fff;
   width: 100%;
   transition: opacity 0.3s;
 }
 
 #setCustomFrame {
-  background-color: #33cc33;
+  background-color: #3c3;
 }
 
 #recordButton:hover,

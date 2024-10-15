@@ -37,6 +37,7 @@ h2,
   font-weight: bold;
   letter-spacing: .05rem;
   font-family: sans-serif;
+  background-color: #68e;
 }
 
 .record-btn:disabled {
