@@ -1,46 +1,42 @@
 let mediaRecorder
-let recordingData = []
+let recordedChunks = []
 
-const getEl = (id) => document.getElementById(id)
+const getElementById = (id) => document.getElementById(id)
 
-const nodeIds = {
+const elementIds = {
   startButton: 'startRecording',
   pauseButton: 'pauseRecording',
   stopButton: 'stopRecording',
   playButton: 'playRecording',
   saveButton: 'saveRecording',
-  statusElement: 'recordStatus',
-  recordControls: 'recordControls',
-  recordControlsWrapper: 'recordControlsWrapper',
+  statusDisplay: 'recordStatus',
+  controlsContainer: 'recordControls',
+  controlsWrapper: 'recordControlsWrapper',
   videoElement: 'recordingVideo',
 }
 
-const buttonLabels = {
-  startButton: '📹', // start recording
-  pauseButton: '⏸️', // pause recording
-  stopButton: '⏹', // stop recording
-  playButton: '▶️', // play recording
-  resumeButton: '▶️', // resume recording
-  hideButton: '✕', // hide recording
-  saveButton: '📼', // save recording
+const buttonIcons = {
+  start: '📹',
+  pause: '⏸️',
+  stop: '⏹',
+  play: '▶️',
+  resume: '▶️',
+  hide: '✕',
+  save: '📼',
 }
 
-const buttons = [
-  { id: nodeIds.startButton, label: buttonLabels.startButton, disabled: false },
-  { id: nodeIds.pauseButton, label: buttonLabels.pauseButton, disabled: true },
-  { id: nodeIds.stopButton, label: buttonLabels.stopButton, disabled: true },
-  { id: nodeIds.playButton, label: buttonLabels.playButton, disabled: true },
-  { id: nodeIds.saveButton, label: buttonLabels.saveButton, disabled: true },
+const buttonConfigs = [
+  { id: elementIds.startButton, icon: buttonIcons.start, disabled: false },
+  { id: elementIds.pauseButton, icon: buttonIcons.pause, disabled: true },
+  { id: elementIds.stopButton, icon: buttonIcons.stop, disabled: true },
+  { id: elementIds.playButton, icon: buttonIcons.play, disabled: true },
+  { id: elementIds.saveButton, icon: buttonIcons.save, disabled: true },
 ]
 
-const nodes = Object.fromEntries(
-  Object.entries(nodeIds).map(([key, id]) => [key, getEl(id)]),
-)
-
-const statuses = {
+const statusMessages = {
   initial: 'Getting ready',
   starting: 'Starting recording...',
-  started: 'Recording...',
+  recording: 'Recording...',
   stopping: 'Stopping recording...',
   stopped: 'Recording stopped',
   saving: 'Saving recording...',
@@ -48,23 +44,25 @@ const statuses = {
   error: 'Error: ',
 }
 
-const options = {
+const mediaOptions = {
   type: 'video/webm; codecs="vp8,opus"',
 }
 
-const getFileName = () => {
+const generateFileName = () => {
   const now = new Date()
   const timestamp = now.toISOString()
-  const room = document.title.match(/(^.+)\s\|/)
-  return room && room[1] ? `${room[1]}_${timestamp}` : `recording_${timestamp}`
+  const roomMatch = document.title.match(/(^.+)\s\|/)
+  return roomMatch && roomMatch[1]
+    ? `${roomMatch[1]}_${timestamp}`
+    : `recording_${timestamp}`
 }
 
-const setStatus = (status) => {
-  nodes.statusElement.innerText = status
+const updateStatus = (status) => {
+  getElementById(elementIds.statusDisplay).innerText = status
 }
 
 const startRecording = async () => {
-  setStatus(statuses.starting)
+  updateStatus(statusMessages.starting)
   try {
     const audioStream = await navigator.mediaDevices.getUserMedia({
       video: false,
@@ -76,19 +74,17 @@ const startRecording = async () => {
     })
 
     const mixedStream = new MediaStream()
-    displayStream
-      .getAudioTracks()
-      .forEach((track) => mixedStream.addTrack(track))
-    displayStream
-      .getVideoTracks()
-      .forEach((track) => mixedStream.addTrack(track))
-    audioStream.getAudioTracks().forEach((track) => mixedStream.addTrack(track))
+    ;[
+      ...displayStream.getAudioTracks(),
+      ...displayStream.getVideoTracks(),
+      ...audioStream.getAudioTracks(),
+    ].forEach((track) => mixedStream.addTrack(track))
 
-    mediaRecorder = new MediaRecorder(mixedStream, options)
+    mediaRecorder = new MediaRecorder(mixedStream, mediaOptions)
 
     mediaRecorder.ondataavailable = (event) => {
       if (event.data && event.data.size > 0) {
-        recordingData.push(event.data)
+        recordedChunks.push(event.data)
       }
     }
 
@@ -100,107 +96,113 @@ const startRecording = async () => {
 
     mediaRecorder.start()
 
-    setStatus(statuses.started)
-    getEl(nodeIds.startButton).disabled = true
-    getEl(nodeIds.pauseButton).disabled = false
-    getEl(nodeIds.stopButton).disabled = false
-    getEl(nodeIds.playButton).disabled = true
-    getEl(nodeIds.saveButton).disabled = true
+    updateStatus(statusMessages.recording)
+    getElementById(elementIds.startButton).disabled = true
+    getElementById(elementIds.pauseButton).disabled = false
+    getElementById(elementIds.stopButton).disabled = false
+    getElementById(elementIds.playButton).disabled = true
+    getElementById(elementIds.saveButton).disabled = true
   } catch (error) {
     console.error('capture failure', error)
-    setStatus('error', error)
+    updateStatus(`${statusMessages.error} ${error}`)
   }
 }
 
 const stopRecording = () => {
-  setStatus(statuses.stopping)
+  updateStatus(statusMessages.stopping)
   mediaRecorder.stop()
 
-  setStatus(statuses.stopped)
-  getEl(nodeIds.startButton).disabled = false
-  getEl(nodeIds.pauseButton).disabled = true
-  getEl(nodeIds.stopButton).disabled = true
-  getEl(nodeIds.playButton).disabled = false
-  getEl(nodeIds.saveButton).disabled = false
+  updateStatus(statusMessages.stopped)
+  getElementById(elementIds.startButton).disabled = false
+  getElementById(elementIds.pauseButton).disabled = true
+  getElementById(elementIds.stopButton).disabled = true
+  getElementById(elementIds.playButton).disabled = false
+  getElementById(elementIds.saveButton).disabled = false
 }
 
 const pauseRecording = () => {
   if (mediaRecorder.state === 'paused') {
-    setStatus(statuses.starting)
+    updateStatus(statusMessages.recording)
     mediaRecorder.resume()
-    getEl(nodeIds.pauseButton).innerText = buttonLabels.pauseButton
-  } else if (mediaRecorder.state === statuses.recording) {
-    setStatus(statuses.stopping)
+    getElementById(elementIds.pauseButton).innerText = buttonIcons.pause
+  } else if (mediaRecorder.state === 'recording') {
+    updateStatus(statusMessages.stopping)
     mediaRecorder.pause()
-    getEl(nodeIds.pauseButton).innerText = buttonLabels.resumeButton
+    getElementById(elementIds.pauseButton).innerText = buttonIcons.resume
   }
 }
 
 const playRecording = () => {
-  const videoElement = nodes.videoElement
+  const videoElement = getElementById(elementIds.videoElement)
   if (videoElement.style.visibility === 'visible') {
-    setStatus(statuses.started)
+    updateStatus(statusMessages.recording)
     videoElement.src = window.URL.createObjectURL(
-      new Blob(recordingData, options),
+      new Blob(recordedChunks, mediaOptions),
     )
     videoElement.play()
-    getEl(nodeIds.playButton).innerText = buttonLabels.hideButton
+    getElementById(elementIds.playButton).innerText = buttonIcons.hide
     videoElement.style.visibility = 'hidden'
   } else {
     videoElement.style.visibility = 'visible'
-    setStatus(statuses.stopped)
-    getEl(nodeIds.playButton).innerText = buttonLabels.playButton
+    updateStatus(statusMessages.stopped)
+    getElementById(elementIds.playButton).innerText = buttonIcons.play
   }
 }
 
 const saveRecording = () => {
-  setStatus('saving')
-  const blob = new Blob(recordingData, options)
+  updateStatus(statusMessages.saving)
+  const blob = new Blob(recordedChunks, mediaOptions)
   const url = window.URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.style.display = 'none'
-  a.href = url
-  a.download = `${getFileName()}.webm`
-  document.body.appendChild(a)
-  a.click()
+  const downloadLink = document.createElement('a')
+  downloadLink.style.display = 'none'
+  downloadLink.href = url
+  downloadLink.download = `${generateFileName()}.webm`
+  document.body.appendChild(downloadLink)
+  downloadLink.click()
   setTimeout(() => {
-    document.body.removeChild(a)
+    document.body.removeChild(downloadLink)
     window.URL.revokeObjectURL(url)
   }, 100)
-  setStatus('saved')
+  updateStatus(statusMessages.saved)
 }
 
-const getButtons = () =>
-  buttons.map(({ id, label, disabled }) => {
+const createButtonElements = () =>
+  buttonConfigs.map(({ id, icon, disabled }) => {
     const button = document.createElement('button')
     button.id = id
-    button.innerHTML = label
+    button.innerHTML = icon
     button.disabled = disabled
     button.classList.add('record-btn')
     return button
   })
 
-const createControls = () => {
-  const controls = document.createElement('div')
-  controls.id = nodeIds.recordControls
+const createControlElements = () => {
+  const controlsContainer = document.createElement('div')
+  controlsContainer.id = elementIds.controlsContainer
 
-  const buttons = getButtons()
+  const buttons = createButtonElements()
 
-  buttons.forEach((button) => controls.appendChild(button))
+  buttons.forEach((button) => controlsContainer.appendChild(button))
 
-  return controls
+  return controlsContainer
 }
 
 const addEventListeners = () => {
-  getEl(nodeIds.startButton).addEventListener('click', startRecording)
-  getEl(nodeIds.stopButton).addEventListener('click', stopRecording)
-  getEl(nodeIds.pauseButton).addEventListener('click', pauseRecording)
-  getEl(nodeIds.playButton).addEventListener('click', playRecording)
-  getEl(nodeIds.saveButton).addEventListener('click', saveRecording)
+  getElementById(elementIds.startButton).addEventListener(
+    'click',
+    startRecording,
+  )
+  getElementById(elementIds.stopButton).addEventListener('click', stopRecording)
+  getElementById(elementIds.pauseButton).addEventListener(
+    'click',
+    pauseRecording,
+  )
+  getElementById(elementIds.playButton).addEventListener('click', playRecording)
+  getElementById(elementIds.saveButton).addEventListener('click', saveRecording)
 }
 
-getEl(nodeIds.recordControlsWrapper).appendChild(createControls())
+getElementById(elementIds.controlsWrapper).appendChild(createControlElements())
 
 addEventListeners()
 
-setStatus(statuses.initial)
+updateStatus(statusMessages.initial)
