@@ -11,43 +11,41 @@ body {
   grid-template-rows: 1fr;
   grid-gap: 1rem;
 }
-
-section {
+body section {
   display: grid;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   place-items: center;
   grid-template-rows: auto 1fr;
 }
-
-h1 {
+body h1 {
   font-family: sans-serif;
-  margin: .7rem 0;
+  margin: 0.7rem 0;
 }
-
-.screen-recorder-iframe {
+body .screen-recorder-iframe {
   width: 100%;
   height: 100%;
   border: none;
 }
-
-.screen-recorder {
+body .screen-recorder {
   border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   padding: 1rem;
   z-index: 10;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(6.5px);
+  -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(6.5px);
+          backdrop-filter: blur(6.5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: grid;
   grid-gap: 1rem;
 }
-
-#recordButton,
-#setCustomFrame {
+body .screen-recorder #recordButton,
+body .screen-recorder #setCustomFrame {
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -56,15 +54,14 @@ h1 {
   background-color: #e00;
   color: #fff;
   width: 100%;
+  -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
 }
-
-#setCustomFrame {
+body .screen-recorder #setCustomFrame {
   background-color: #3c3;
 }
-
-#recordButton:hover,
-#setCustomFrame:hover {
+body .screen-recorder #recordButton:hover,
+body .screen-recorder #setCustomFrame:hover {
   opacity: 0.8;
 }
 
@@ -73,17 +70,17 @@ h1 {
   top: 3.6rem;
   right: -250px;
   width: 250px;
+  -webkit-transition: right 0.3s ease;
   transition: right 0.3s ease;
 }
-
 .hamburger-menu.open {
   right: 0;
 }
 
 .hamburger-button {
   position: fixed;
-  top: .7rem;
-  right: .7rem;
+  top: 0.7rem;
+  right: 0.7rem;
   font-size: 24px;
   cursor: pointer;
   z-index: 1000;

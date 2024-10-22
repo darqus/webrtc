@@ -1,0 +1,98 @@
+$white: #fff;
+$primary-color: #e00;
+$secondary-color: #3c3;
+$border-color: rgba($white, 0.3);
+$background-color: rgba($white, 0.2);
+$shadow-color: rgba($white, 0.9);
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 1fr;
+  grid-gap: 1rem;
+
+  section {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    place-items: center;
+    grid-template-rows: auto 1fr;
+  }
+
+  h1 {
+    font-family: sans-serif;
+    margin: 0.7rem 0;
+  }
+
+  .screen-recorder-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .screen-recorder {
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    z-index: 10;
+    background-color: $background-color;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.5px);
+    border: 1px solid $border-color;
+    display: grid;
+    grid-gap: 1rem;
+
+    #recordButton,
+    #setCustomFrame {
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 1rem;
+      background-color: $primary-color;
+      color: $white;
+      width: 100%;
+      transition: opacity 0.3s;
+    }
+
+    #setCustomFrame {
+      background-color: $secondary-color;
+    }
+
+    #recordButton:hover,
+    #setCustomFrame:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.hamburger-menu {
+  position: fixed;
+  top: 3.6rem;
+  right: -250px;
+  width: 250px;
+  transition: right 0.3s ease;
+
+  &.open {
+    right: 0;
+  }
+}
+
+.hamburger-button {
+  position: fixed;
+  top: 0.7rem;
+  right: 0.7rem;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  text-shadow: 0 0 10px $shadow-color;
+}

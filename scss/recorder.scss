@@ -1,0 +1,72 @@
+$background-color: #fff;
+$border-color: rgba(0, 0, 0, 0.2);
+$disabled-opacity: 0.4;
+$disabled-cursor: not-allowed;
+$button-background-color: #eee;
+
+html {
+  height: 100%;
+  display: grid;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  grid-gap: 1rem;
+
+  section {
+    display: grid;
+    grid-gap: 0.7rem;
+    place-items: center;
+
+    h2,
+    #recordStatus {
+      font-family: sans-serif;
+      margin: 0;
+    }
+
+    #recordControlsWrapper > div {
+      display: grid;
+      grid-auto-flow: column;
+      grid-gap: 1rem;
+
+      .record-btn {
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        padding: 6px 12px;
+        font-family: sans-serif;
+        background-color: $button-background-color;
+        font-size: 2.5rem;
+
+        &:disabled {
+          cursor: $disabled-cursor;
+          opacity: $disabled-opacity;
+        }
+      }
+    }
+  }
+
+  .recorder {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    box-shadow: 0 0 10px $border-color;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    z-index: 10;
+    background-color: $background-color;
+    width: 200px;
+    height: 140px;
+  }
+
+  video {
+    display: grid;
+    width: 80vw;
+    height: 100%;
+    visibility: hidden;
+  }
+}

@@ -10,26 +10,22 @@ body {
   place-items: center;
   grid-gap: 1rem;
 }
-
-section {
+body section {
   display: grid;
-  grid-gap: .7rem;
+  grid-gap: 0.7rem;
   place-items: center;
 }
-
-h2,
-#recordStatus {
+body section h2,
+body section #recordStatus {
   font-family: sans-serif;
   margin: 0;
 }
-
-#recordControlsWrapper>div {
+body section #recordControlsWrapper > div {
   display: grid;
   grid-auto-flow: column;
   grid-gap: 1rem;
 }
-
-.record-btn {
+body section #recordControlsWrapper > div .record-btn {
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -38,18 +34,17 @@ h2,
   background-color: #eee;
   font-size: 2.5rem;
 }
-
-.record-btn:disabled {
+body section #recordControlsWrapper > div .record-btn:disabled {
   cursor: not-allowed;
-  opacity: .4;
+  opacity: 0.4;
 }
-
-.recorder {
+body .recorder {
   position: fixed;
   top: 1rem;
   right: 1rem;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 0.5rem;
   padding: 1rem;
   z-index: 10;
@@ -57,8 +52,7 @@ h2,
   width: 200px;
   height: 140px;
 }
-
-video {
+body video {
   display: grid;
   width: 80vw;
   height: 100%;
