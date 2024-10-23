@@ -1,30 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <title>Screencast Content</title>
+    <link
+      rel="stylesheet"
+      href="css/style.css"
+    />
+    <script
+      defer
+      src="js/index.js"
+    ></script>
+  </head>
 
-<head>
-  <title>Screencast Content</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <script defer src="js/index.js"></script>
-</head>
+  <body>
+    <section>
+      <h1>Screencast Content</h1>
+      <iframe
+        class="screen-recorder-iframe"
+        allow="camera; microphone; fullscreen; display-capture; autoplay"
+      ></iframe>
+    </section>
 
-<body>
-  <section>
-    <h1>Screencast Content</h1>
-    <iframe class="screen-recorder-iframe" allow="camera; microphone; fullscreen; display-capture; autoplay"></iframe>
-  </section>
+    <div class="hamburger-button">☰</div>
 
-  <div class="hamburger-button">☰</div>
+    <div
+      class="hamburger-menu"
+      id="hamburgerMenu"
+    >
+      <div class="screen-recorder">
+        <input
+          id="customFrame"
+          placeholder="Enter custom frame src"
+        />
+        <button id="setCustomFrame">📼 Set custom frame src</button>
 
-  <div class="hamburger-menu" id="hamburgerMenu">
-    <div class="screen-recorder">
-      <input id="customFrame" placeholder="Enter custom frame src" />
-      <button id="setCustomFrame">📼 Set custom frame src</button>
-
-      <a href="recorder.html" target="_blank">
+        <a
+          href="recorder.html"
+          target="_blank"
+        >
           <button id="recordButton">📹 Record</button>
         </a>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
