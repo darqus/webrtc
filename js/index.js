@@ -2,6 +2,8 @@ const customFrameSrcInput = document.getElementById('customFrame')
 const setCustomFrameButton = document.getElementById('setCustomFrame')
 const hamburgerToggle = document.querySelector('.hamburger-button')
 const hamburgerMenu = document.querySelector('.hamburger-menu')
+const recordBtn = document.querySelector('#recordButton')
+const stopBtn = document.querySelector('#stopButton')
 
 const hamburgerToggleIcons = {
   open: '☰',
@@ -25,4 +27,24 @@ hamburgerToggle.addEventListener('click', () => {
   hamburgerToggle.innerText = hamburgerMenu.classList.contains('open')
     ? hamburgerToggleIcons.close
     : hamburgerToggleIcons.open
+})
+
+recordBtn.addEventListener('click', () => {
+  window.postMessage(
+    {
+      type: 'from-tab',
+      data: 'record: ' + new Date(),
+    },
+    '*',
+  )
+})
+
+stopBtn.addEventListener('click', () => {
+  window.postMessage(
+    {
+      type: 'from-tab',
+      data: 'stop: ' + new Date(),
+    },
+    '*',
+  )
 })
