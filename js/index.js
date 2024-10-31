@@ -32,7 +32,7 @@ hamburgerToggle.addEventListener('click', () => {
 recordBtn.addEventListener('click', () => {
   window.postMessage(
     {
-      type: 'from-tab',
+      type: 'start-record',
       data: 'record: ' + new Date(),
     },
     '*',
@@ -42,7 +42,7 @@ recordBtn.addEventListener('click', () => {
 stopBtn.addEventListener('click', () => {
   window.postMessage(
     {
-      type: 'from-tab',
+      type: 'stop-record',
       data: 'stop: ' + new Date(),
     },
     '*',
