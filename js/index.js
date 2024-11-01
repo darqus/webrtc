@@ -4,6 +4,8 @@ const hamburgerToggle = document.querySelector('.hamburger-button')
 const hamburgerMenu = document.querySelector('.hamburger-menu')
 const recordBtn = document.querySelector('#recordButton')
 const stopBtn = document.querySelector('#stopButton')
+const hideVideo = document.querySelector('#hideVideo')
+const showVideo = document.querySelector('#showVideo')
 
 const hamburgerToggleIcons = {
   open: '☰',
@@ -47,4 +49,18 @@ stopBtn.addEventListener('click', () => {
     },
     '*',
   )
+})
+
+hideVideo.addEventListener('click', () => {
+  const videoTags = document.querySelectorAll('video')
+  videoTags.forEach((videoTag) => {
+    videoTag.setAttribute('hidden', '')
+  })
+})
+
+showVideo.addEventListener('click', () => {
+  const videoTags = document.querySelectorAll('video')
+  videoTags.forEach((videoTag) => {
+    videoTag.removeAttribute('hidden')
+  })
 })
