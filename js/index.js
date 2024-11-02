@@ -32,6 +32,7 @@ hamburgerToggle.addEventListener('click', () => {
 })
 
 recordBtn.addEventListener('click', () => {
+  // send native event
   window.postMessage(
     {
       type: 'start-record-from-tab',
@@ -42,7 +43,7 @@ recordBtn.addEventListener('click', () => {
   /* chrome.runtime.sendMessage(
     'gddiikjkogpnlbejhjenjfhjmokamoji',
     {
-      type: 'start-recording',
+      type: 'start-record-from-tab',
       target: 'offscreen',
     },
     (e) => {
@@ -52,6 +53,7 @@ recordBtn.addEventListener('click', () => {
 })
 
 stopBtn.addEventListener('click', () => {
+  // send native event
   window.postMessage(
     {
       type: 'stop-record-from-tab',
@@ -62,7 +64,7 @@ stopBtn.addEventListener('click', () => {
   /* chrome.runtime.sendMessage(
     'gddiikjkogpnlbejhjenjfhjmokamoji',
     {
-      type: 'stop-recording',
+      type: 'stop-recording-from-tab',
       target: 'offscreen',
     },
     (e) => {
