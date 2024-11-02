@@ -32,15 +32,15 @@ hamburgerToggle.addEventListener('click', () => {
 })
 
 recordBtn.addEventListener('click', () => {
-  /* window.postMessage(
+  window.postMessage(
     {
-      type: 'start-record',
+      type: 'start-record-from-tab',
       data: 'record: ' + new Date(),
     },
     '*',
-  ) */
-  chrome.runtime.sendMessage(
-    'ocofhchoeenofigmgehphnmbglomkhed',
+  )
+  /* chrome.runtime.sendMessage(
+    'gddiikjkogpnlbejhjenjfhjmokamoji',
     {
       type: 'start-recording',
       target: 'offscreen',
@@ -48,19 +48,19 @@ recordBtn.addEventListener('click', () => {
     (e) => {
       console.log(e)
     },
-  )
+  ) */
 })
 
 stopBtn.addEventListener('click', () => {
-  /* window.postMessage(
+  window.postMessage(
     {
-      type: 'stop-record',
+      type: 'stop-record-from-tab',
       data: 'stop: ' + new Date(),
     },
     '*',
-  ) */
-  chrome.runtime.sendMessage(
-    'ocofhchoeenofigmgehphnmbglomkhed',
+  )
+  /* chrome.runtime.sendMessage(
+    'gddiikjkogpnlbejhjenjfhjmokamoji',
     {
       type: 'stop-recording',
       target: 'offscreen',
@@ -68,7 +68,7 @@ stopBtn.addEventListener('click', () => {
     (e) => {
       console.log(e)
     },
-  )
+  ) */
 })
 
 hideVideo.addEventListener('click', () => {
