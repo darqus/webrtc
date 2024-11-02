@@ -32,22 +32,42 @@ hamburgerToggle.addEventListener('click', () => {
 })
 
 recordBtn.addEventListener('click', () => {
-  window.postMessage(
+  /* window.postMessage(
     {
       type: 'start-record',
       data: 'record: ' + new Date(),
     },
     '*',
+  ) */
+  chrome.runtime.sendMessage(
+    'ocofhchoeenofigmgehphnmbglomkhed',
+    {
+      type: 'start-recording',
+      target: 'offscreen',
+    },
+    (e) => {
+      console.log(e)
+    },
   )
 })
 
 stopBtn.addEventListener('click', () => {
-  window.postMessage(
+  /* window.postMessage(
     {
       type: 'stop-record',
       data: 'stop: ' + new Date(),
     },
     '*',
+  ) */
+  chrome.runtime.sendMessage(
+    'ocofhchoeenofigmgehphnmbglomkhed',
+    {
+      type: 'stop-recording',
+      target: 'offscreen',
+    },
+    (e) => {
+      console.log(e)
+    },
   )
 })
 
