@@ -2,8 +2,8 @@ const customFrameSrcInput = document.getElementById('customFrame')
 const setCustomFrameButton = document.getElementById('setCustomFrame')
 const hamburgerToggle = document.querySelector('.hamburger-button')
 const hamburgerMenu = document.querySelector('.hamburger-menu')
-const recordBtn = document.querySelector('#recordButton')
-const stopBtn = document.querySelector('#stopButton')
+// const recordBtn = document.querySelector('#recordButton')
+// const stopBtn = document.querySelector('#stopButton')
 const hideVideo = document.querySelector('#hideVideo')
 const showVideo = document.querySelector('#showVideo')
 
@@ -31,47 +31,47 @@ hamburgerToggle.addEventListener('click', () => {
     : hamburgerToggleIcons.open
 })
 
-recordBtn.addEventListener('click', () => {
-  // send native event
-  window.postMessage(
-    {
-      type: 'start-record-from-tab',
-      data: 'record: ' + new Date(),
-    },
-    '*',
-  )
-  /* chrome.runtime.sendMessage(
-    'gddiikjkogpnlbejhjenjfhjmokamoji',
-    {
-      type: 'start-record-from-tab',
-      target: 'offscreen',
-    },
-    (e) => {
-      console.log(e)
-    },
-  ) */
-})
+// recordBtn.addEventListener('click', () => {
+//   // send native event
+//   window.postMessage(
+//     {
+//       type: 'start-record-from-tab',
+//       data: 'record: ' + new Date(),
+//     },
+//     '*',
+//   )
+//   /* chrome.runtime.sendMessage(
+//     'gddiikjkogpnlbejhjenjfhjmokamoji',
+//     {
+//       type: 'start-record-from-tab',
+//       target: 'offscreen',
+//     },
+//     (e) => {
+//       console.log(e)
+//     },
+//   ) */
+// })
 
-stopBtn.addEventListener('click', () => {
-  // send native event
-  window.postMessage(
-    {
-      type: 'stop-record-from-tab',
-      data: 'stop: ' + new Date(),
-    },
-    '*',
-  )
-  /* chrome.runtime.sendMessage(
-    'gddiikjkogpnlbejhjenjfhjmokamoji',
-    {
-      type: 'stop-recording-from-tab',
-      target: 'offscreen',
-    },
-    (e) => {
-      console.log(e)
-    },
-  ) */
-})
+// stopBtn.addEventListener('click', () => {
+//   // send native event
+//   window.postMessage(
+//     {
+//       type: 'stop-record-from-tab',
+//       data: 'stop: ' + new Date(),
+//     },
+//     '*',
+//   )
+//   /* chrome.runtime.sendMessage(
+//     'gddiikjkogpnlbejhjenjfhjmokamoji',
+//     {
+//       type: 'stop-recording-from-tab',
+//       target: 'offscreen',
+//     },
+//     (e) => {
+//       console.log(e)
+//     },
+//   ) */
+// })
 
 hideVideo.addEventListener('click', () => {
   const videoTags = document.querySelectorAll('video')
