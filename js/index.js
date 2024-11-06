@@ -73,16 +73,16 @@ hamburgerToggle.addEventListener('click', () => {
 //   ) */
 // })
 
-hideVideo.addEventListener('click', () => {
-  const videoTags = document.querySelectorAll('video')
-  videoTags.forEach((videoTag) => {
-    videoTag.setAttribute('hidden', '')
-  })
-})
+// hideVideo.addEventListener('click', () => {
+//   const videoTags = document.querySelectorAll('video')
+//   videoTags.forEach((videoTag) => {
+//     videoTag.setAttribute('hidden', '')
+//   })
+// })
 
-showVideo.addEventListener('click', () => {
-  const videoTags = document.querySelectorAll('video')
-  videoTags.forEach((videoTag) => {
-    videoTag.removeAttribute('hidden')
-  })
-})
+// showVideo.addEventListener('click', () => {
+//   const videoTags = document.querySelectorAll('video')
+//   videoTags.forEach((videoTag) => {
+//     videoTag.removeAttribute('hidden')
+//   })
+// })
