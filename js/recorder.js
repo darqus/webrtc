@@ -45,7 +45,7 @@ const statusMessages = {
 }
 
 const mediaOptions = {
-  type: 'video/webm; codecs="vp8,opus"',
+  mimeType: 'video/webm; codecs="vp8,opus"',
 }
 
 const generateFileName = () => {
